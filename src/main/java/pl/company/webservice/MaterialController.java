@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.company.entity.Material;
 import pl.company.repository.CompanyRepository;
 import pl.company.repository.MaterialRepository;
+import pl.company.service.MaterialService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,19 +20,16 @@ import java.util.List;
 public class MaterialController {
 
     @Autowired
-    private CompanyRepository companyRepository;
+    private MaterialService materialService;
 
-    @Autowired
-    private MaterialRepository materialRepository;
 
     @RequestMapping(value = "materialList", method = RequestMethod.GET)
     List<Material> getMaterialsByCompanyId(@RequestParam(name = "companyID", required = false) String companyId){
         List<Material> materials = new ArrayList<>();
         if(companyId==null){
-            this.materialRepository.findAll().forEach(material -> materials.add(material));
-            return materials;
+            return materialService.getAllMaterials();
         }else{
-            return this.companyRepository.findOne(Long.valueOf(companyId)).getMaterials();
+            return materialService.getMaterialsByCompanyId(Long.valueOf(companyId));
         }
 
     }

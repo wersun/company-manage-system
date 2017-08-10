@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.company.entity.MaterialDetails;
 import pl.company.repository.MaterialRepository;
+import pl.company.service.MaterialDetailsService;
 
 /**
  * Created by wronskip on 09.08.2017.
@@ -15,10 +16,10 @@ import pl.company.repository.MaterialRepository;
 public class MaterialDetailsController {
 
     @Autowired
-    private MaterialRepository materialRepository;
+    private MaterialDetailsService service;
 
     @RequestMapping(value = "materialDetails", method = RequestMethod.GET)
     MaterialDetails getDetailsByMaterialId(@RequestParam(name = "ID", required = true) String materialId){
-        return this.materialRepository.findOne(Long.valueOf(materialId)).getMaterialDetails();
+        return this.service.getDetailsByMaterialId(Long.valueOf(materialId));
     }
 }
