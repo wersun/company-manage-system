@@ -2,9 +2,11 @@ package pl.company.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.support.BasicAuthorizationInterceptor;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 import pl.company.entity.Company;
 import pl.company.entity.Material;
@@ -18,6 +20,7 @@ import java.util.List;
 
 /**
  * Created by wronskip on 09.08.2017.
+ * Main view controller contains navigations between templates and control post/get operations.
  */
 @org.springframework.stereotype.Controller
 public class CompanyController {
@@ -33,6 +36,11 @@ public class CompanyController {
     @Autowired
     private MaterialService materialService;
 
+    /**
+     *
+     * @param model
+     * @return return companies template with model in it.
+     */
     @GetMapping(value = "companies")
     public String init(Model model){
         if(companyList==null) {
@@ -43,6 +51,12 @@ public class CompanyController {
     }
 
 
+    /**
+     *
+     * @param companyId
+     * @param model
+     * @return template with list of materials with model for specified company Id.
+     */
     @GetMapping(value = "company/{id}")
     public String showMaterials(@PathVariable(value = "id") String companyId,Model model){
         Company currentCompany = companyList.stream().filter(company -> company.getId() == Long.valueOf(companyId)).findFirst().get();
@@ -52,6 +66,12 @@ public class CompanyController {
         return "materials";
     }
 
+    /**
+     *
+     * @param materialId
+     * @param model
+     * @return details template with model for specified material Id .
+     */
     @GetMapping(value = "materials/{materialId}/details")
     public String showMaterialDetails(@PathVariable(value = "materialId") String materialId,Model model){
         allMaterials = new ArrayList<>();

@@ -17,6 +17,11 @@ public class MaterialDetailsService {
     @Autowired
     private MaterialRepository materialRepository;
 
+    /**
+     *
+     * @param materialId
+     * @return material details for specified material Id.
+     */
     public MaterialDetails getDetailsByMaterialId(Long materialId){
         return this.materialRepository.findOne(materialId).getMaterialDetails();
     }

@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * Created by wronskip on 08.08.2017.
+ * Repository for Material pojos, including db operations.
  */
 @Repository
 public interface MaterialRepository extends CrudRepository<Material, Long> {

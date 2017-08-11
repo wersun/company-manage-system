@@ -17,6 +17,7 @@ import java.util.List;
 
 /**
  * Created by wronskip on 10.08.2017.
+ * REST web service.
  */
 @RestController
 public class CompanyWebService {
@@ -25,7 +26,6 @@ public class CompanyWebService {
     private CompanyService companyService;
     @Autowired
     private MaterialService materialService;
-
     @Autowired
     private MaterialDetailsService materialDetailsService;
 

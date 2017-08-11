@@ -21,13 +21,21 @@ public class CompanyService {
     private CompanyRepository companyRepository;
 
 
-
+    /**
+     *
+     * @return all companies available in application.
+     */
     public List<Company> findAllCompanies(){
         List<Company> companies = new ArrayList<>();
         this.companyRepository.findAll().forEach(company->companies.add(company));
         return companies;
     }
 
+    /**
+     *
+     * @param companyId
+     * @return company for specified company Id.
+     */
     public Company findCompanyById(Long companyId){
      return this.companyRepository.findOne(companyId);
 
