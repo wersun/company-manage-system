@@ -82,8 +82,6 @@ public class CompanyController {
 
     private List<Company> getAllCompanies() {
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getInterceptors().add(
-                new BasicAuthorizationInterceptor("user", "haslo"));
         ResponseEntity<Company[]> responseEntity=restTemplate.getForEntity("http://localhost:8337/companyList",Company[].class );
         return Arrays.asList(responseEntity.getBody());
     }
